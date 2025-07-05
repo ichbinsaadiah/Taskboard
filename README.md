@@ -60,9 +60,6 @@ TaskBoard/
 ├── dashboard.php
 └── README.md
 
-yaml
-Copy code
-
 ---
 
 ## 🗂️ Database Schema
@@ -96,22 +93,18 @@ Copy code
    git clone https://github.com/your-username/taskboard.git
 Move the folder to your XAMPP htdocs directory:
 
-makefile
-Copy code
 C:\xampp\htdocs\TaskBoard
 Import the SQL schema into your MySQL database (create taskboard DB and tables manually or via script)
 
 Update your includes/config.php file:
-
-php
-Copy code
 $conn = new mysqli('localhost', 'root', '', 'taskboard');
-Open the app in browser:
 
-arduino
-Copy code
+Open the app in browser:
 http://localhost/taskboard/login.php
-✅ All Implemented Features
+
+---
+
+## ✅ All Implemented Features
 Feature	Status
 🔐 User Login/Registration	✅ Done
 📝 Add New Task (Modal Form)	✅ Done
@@ -122,27 +115,26 @@ Feature	Status
 ⚙️ Modular PHP + JS Code	✅ Done
 🎨 Bootstrap 5 + Custom Design	✅ Done
 
-🔮 Planned Enhancements
+---
+
+## 🔮 Planned Enhancements
 ⏳ Task statuses (e.g. Pending, In Progress, Done)
-
 🏷️ Task tagging or categories
-
 📅 Due dates & reminders
-
 🔍 Search & filtering options
-
 📊 User dashboard analytics (e.g. completed vs total)
-
 🧩 Google Login (OAuth2)
-
 🌍 Multi-language support (i18n)
-
 📬 Email notifications and summaries
 
-🤝 Contributing
+---
+
+## 🤝 Contributing
 Have ideas to improve TaskBoard?
 Fork this repo, make changes, and submit a pull request — contributions are welcome!
 
-🧑‍💻 Author
+---
+
+## 🧑‍💻 Author
 Designed and developed by Saadiah Khan
 🌐 Personal learning project to explore full-stack PHP web development
