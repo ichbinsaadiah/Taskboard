@@ -1,22 +1,43 @@
 <?php
 session_start();
+header('Content-Type: application/json');
 require_once 'includes/config.php';
 
-if (!isset($_SESSION['user_id']) || !isset($_POST['id']) || !isset($_POST['title'])) {
+if (!isset($_SESSION['user_id']) || !isset($_POST['id'])) {
     echo json_encode(['status' => 'error', 'message' => 'Missing fields']);
     exit;
 }
 
 $id = $_POST['id'];
-$title = $_POST['title'];
-$desc = $_POST['description'];
 $userId = $_SESSION['user_id'];
 
-$stmt = $conn->prepare("UPDATE todos SET title = ?, description = ? WHERE id = ? AND user_id = ?");
-$stmt->bind_param("ssii", $title, $desc, $id, $userId);
-$stmt->execute();
+// Use null if fields are not provided
+$title = isset($_POST['title']) ? trim($_POST['title']) : null;
+$desc  = isset($_POST['description']) ? trim($_POST['description']) : null;
+$list  = isset($_POST['list']) ? trim($_POST['list']) : null;
+$status = isset($_POST['status']) ? trim($_POST['status']) : null;
 
-echo json_encode(['status' => 'success', 'message' => 'Task updated']);
+// Status-only update (via checkbox)
+if ($status !== null && $title === null && $desc === null && $list === null) {
+    $stmt = $conn->prepare("UPDATE todos SET status = ? WHERE id = ? AND user_id = ?");
+    $stmt->bind_param("sii", $status, $id, $userId);
+
+// Full update (from Edit modal)
+} elseif ($title !== null && $desc !== null && $list !== null) {
+    $stmt = $conn->prepare("UPDATE todos SET title = ?, description = ?, list = ? WHERE id = ? AND user_id = ?");
+    $stmt->bind_param("sssii", $title, $desc, $list, $id, $userId);
+
+// Invalid case
+} else {
+    echo json_encode(['status' => 'error', 'message' => 'Incomplete update fields']);
+    exit;
+}
+
+if ($stmt->execute()) {
+    echo json_encode(['status' => 'success', 'message' => 'Task updated']);
+} else {
+    echo json_encode(['status' => 'error', 'message' => 'Update failed']);
+}
 
 $stmt->close();
 $conn->close();

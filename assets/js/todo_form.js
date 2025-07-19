@@ -9,6 +9,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const formData = new FormData();
     formData.append("title", document.getElementById("title").value);
     formData.append("description", document.getElementById("description").value);
+    formData.append("status", "Pending");
+    formData.append("list", document.getElementById("list").value);
 
     fetch("add_todo.php", {
       method: "POST",
@@ -30,6 +32,7 @@ document.addEventListener("DOMContentLoaded", function () {
         // ✅ Close modal
         const modal = bootstrap.Modal.getInstance(document.getElementById("addTaskModal"));
         modal.hide();
+        messageBox.textContent = ''; // Claer message after closing
       }
     });
   });

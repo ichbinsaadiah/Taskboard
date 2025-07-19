@@ -106,26 +106,26 @@ http://localhost/taskboard/login.php
 
 ## ✅ All Implemented Features
 Feature	Status
-🔐 User Login/Registration	✅ Done
-📝 Add New Task (Modal Form)	✅ Done
-✏️ Edit Task	✅ Done
-🗑️ Delete Task	✅ Done
-📦 Task Cards	✅ Done
-🖼️ Empty State UI	✅ Done
-⚙️ Modular PHP + JS Code	✅ Done
-🎨 Bootstrap 5 + Custom Design	✅ Done
+- 🔐 User Login/Registration	✅ Done
+- 📝 Add New Task (Modal Form)	✅ Done
+- ✏️ Edit Task	✅ Done
+- 🗑️ Delete Task	✅ Done
+- 📦 Task Cards	✅ Done
+- 🖼️ Empty State UI	✅ Done
+- ⚙️ Modular PHP + JS Code	✅ Done
+- 🎨 Bootstrap 5 + Custom Design	✅ Done
 
 ---
 
 ## 🔮 Planned Enhancements
-⏳ Task statuses (e.g. Pending, In Progress, Done)
-🏷️ Task tagging or categories
-📅 Due dates & reminders
-🔍 Search & filtering options
-📊 User dashboard analytics (e.g. completed vs total)
-🧩 Google Login (OAuth2)
-🌍 Multi-language support (i18n)
-📬 Email notifications and summaries
+- ⏳ Task statuses (e.g. Pending, In Progress, Done)
+- 🏷️ Task tagging or categories
+- 📅 Due dates & reminders
+- 🔍 Search & filtering options
+- 📊 User dashboard analytics (e.g. completed vs total)
+- 🧩 Google Login (OAuth2)
+- 🌍 Multi-language support (i18n)
+- 📬 Email notifications and summaries
 
 ---
 

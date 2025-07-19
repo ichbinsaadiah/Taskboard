@@ -43,6 +43,21 @@ if (!isset($_SESSION['user_id'])) {
             <label for="title" class="form-label">To-Do Title</label>
             <input type="text" id="title" class="form-control" required>
           </div>
+  <div class="mb-3">
+  <label for="list" class="form-label">Category</label>
+  <select id="list" name="list" class="form-select" required>
+    <option value="Inbox">Inbox</option>
+    <option value="Work">Work</option>
+    <option value="Personal">Personal</option>
+    <option value="Shopping">Shopping</option>
+    <option value="Errands">Errands</option>
+    <option value="Health">Health</option>
+    <option value="Study">Study</option>
+    <option value="Projects">Projects</option>
+    <option value="Ideas">Ideas</option>
+    <option value="Planning">Planning</option>
+  </select>
+</div>
           <div class="mb-3">
             <label for="description" class="form-label">Description</label>
             <textarea id="description" class="form-control" rows="3"></textarea>
@@ -56,7 +71,7 @@ if (!isset($_SESSION['user_id'])) {
     </div>
   </div>
 
-  <!-- Edit Task Modal -->
+<!-- Edit Task Modal -->
 <div class="modal fade" id="editTaskModal" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog">
     <form id="editForm" class="modal-content">
@@ -66,14 +81,31 @@ if (!isset($_SESSION['user_id'])) {
       </div>
       <div class="modal-body">
         <input type="hidden" id="edit_id">
+
         <div class="mb-3">
           <label for="edit_title" class="form-label">Title</label>
           <input type="text" id="edit_title" class="form-control" required>
         </div>
+
         <div class="mb-3">
           <label for="edit_description" class="form-label">Description</label>
           <textarea id="edit_description" class="form-control" rows="3"></textarea>
         </div>
+        <div class="mb-3">
+    <label for="edit_list" class="form-label">Category</label>
+    <select id="edit_list" class="form-select">
+      <option value="Inbox">Inbox</option>
+      <option value="Work">Work</option>
+      <option value="Personal">Personal</option>
+      <option value="Shopping">Shopping</option>
+      <option value="Errands">Errands</option>
+      <option value="Health">Health</option>
+      <option value="Study">Study</option>
+      <option value="Projects">Projects</option>
+      <option value="Ideas">Ideas</option>
+      <option value="Planning">Planning</option>
+    </select>
+  </div>
       </div>
       <div class="modal-footer">
         <button type="submit" class="btn btn-success">Update Task</button>
