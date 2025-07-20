@@ -27,6 +27,26 @@ if (!isset($_SESSION['user_id'])) {
     <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addTaskModal">+ Add New Task</button>
   </div>
 
+  <!-- Category Filter -->
+<div class="row mb-3">
+  <div class="col-md-4">
+    <label for="categoryFilter" class="form-label fw-bold">Filter by Category</label>
+    <select id="categoryFilter" class="form-select">
+      <option value="All">All</option>
+      <option value="Inbox">Inbox</option>
+      <option value="Work">Work</option>
+      <option value="Personal">Personal</option>
+      <option value="Shopping">Shopping</option>
+      <option value="Errands">Errands</option>
+      <option value="Health">Health</option>
+      <option value="Study">Study</option>
+      <option value="Projects">Projects</option>
+      <option value="Ideas">Ideas</option>
+      <option value="Planning">Planning</option>
+    </select>
+  </div>
+</div>
+
   <!-- Bootstrap Modal -->
   <div class="modal fade" id="addTaskModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="addTaskLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -126,7 +146,6 @@ if (!isset($_SESSION['user_id'])) {
   <div id="todoList" class="row g-4"></div>
 
   <!-- Completed Tasks Section -->
-<!-- Completed Tasks Section -->
 <div id="completedSection" class="mt-4" style="display: none;">
   <button class="btn btn-outline-secondary w-100" data-bs-toggle="collapse" data-bs-target="#completedTasks" aria-expanded="false" aria-controls="completedTasks">
     Show Completed Tasks

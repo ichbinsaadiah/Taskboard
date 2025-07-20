@@ -3,26 +3,32 @@ document.addEventListener("DOMContentLoaded", function () {
   const heading = document.getElementById("todoHeading");
   const noData = document.getElementById("noData");
 
-  function loadTodos() {
-    fetch("fetch_todos.php")
-      .then(res => res.json())
-      .then(data => {
-        const completedList = document.getElementById("completedList");
-        todoList.innerHTML = "";
-        completedList.innerHTML = "";
-        document.getElementById("completedSection").style.display = "none";
-        let hasCompleted = false;
+function loadTodos() {
+  fetch("fetch_todos.php")
+    .then(res => res.json())
+    .then(data => {
+      const selectedCategory = document.getElementById("categoryFilter").value;
+      const filteredData = selectedCategory === "All"
+        ? data
+        : data.filter(todo => (todo.list || "Inbox").trim() === selectedCategory);
 
-        if (data.length === 0) {
-          heading.style.display = "none";
-          noData.style.display = "flex";
-        } else {
-          heading.style.display = "block";
-          noData.style.display = "none";
+      const completedList = document.getElementById("completedList");
+      todoList.innerHTML = "";
+      completedList.innerHTML = "";
+      document.getElementById("completedSection").style.display = "none";
+      let hasCompleted = false;
 
-  data.forEach(todo => {
-  const card = document.createElement("div");
-  card.className = "col-md-4";
+      if (filteredData.length === 0) {
+        heading.style.display = "none";
+        noData.style.display = "flex";
+      } else {
+        heading.style.display = "block";
+        noData.style.display = "none";
+
+        filteredData.forEach(todo => {
+          const card = document.createElement("div");
+          card.className = "col-md-4";
+
   
     const categoryColors = {
     "Inbox": "primary",
@@ -89,6 +95,8 @@ if (hasCompleted) {
 
   loadTodos();
   window.loadTodos = loadTodos;
+  document.getElementById("categoryFilter").addEventListener("change", loadTodos);
+
 
   document.addEventListener("change", function (e) {
   if (e.target.classList.contains("task-checkbox")) {
