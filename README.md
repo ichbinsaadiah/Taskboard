@@ -11,6 +11,8 @@
 - Edit existing tasks in a modal form
 - Delete tasks with confirmation
 - Responsive card-based layout for tasks
+- Filter tasks by category
+- Collapse/expand completed tasks section
 
 🔐 **User Authentication**
 - Session-based login system
@@ -55,6 +57,7 @@ TaskBoard/
 ├── fetch_todos.php
 ├── update_todo.php
 ├── delete_todo.php
+├── fetch_categories.php
 ├── login.php / login.html
 ├── register.php / register.html
 ├── dashboard.php
@@ -79,10 +82,12 @@ TaskBoard/
 | Column       | Type         |
 |--------------|--------------|
 | id           | INT, AUTO_INCREMENT, PRIMARY KEY |
-| user_id      | INT (foreign key) |
-| title        | VARCHAR(255) |
-| description  | TEXT         |
-| created_at   | TIMESTAMP    |
+| user_id      | INT (foreign key)             |
+| title        | VARCHAR(255)                  |
+| description  | TEXT                          |
+| list         | VARCHAR(100)                  |
+| status       | VARCHAR(50)                   |
+| created_at   | TIMESTAMP                     |
 
 ---
 
@@ -105,27 +110,30 @@ http://localhost/taskboard/login.php
 ---
 
 ## ✅ All Implemented Features
-Feature	Status
-- 🔐 User Login/Registration	✅ Done
-- 📝 Add New Task (Modal Form)	✅ Done
-- ✏️ Edit Task	✅ Done
-- 🗑️ Delete Task	✅ Done
-- 📦 Task Cards	✅ Done
-- 🖼️ Empty State UI	✅ Done
-- ⚙️ Modular PHP + JS Code	✅ Done
-- 🎨 Bootstrap 5 + Custom Design	✅ Done
+| Feature                            | Status |
+| ---------------------------------- | ------ |
+| 🔐 User Login/Registration         | ✅ Done |
+| 📝 Add New Task (Modal Form)       | ✅ Done |
+| ✏️ Edit Task                       | ✅ Done |
+| 🗑️ Delete Task                    | ✅ Done |
+| 📦 Task Cards                      | ✅ Done |
+| 🖼️ Empty State UI                 | ✅ Done |
+| ⚙️ Modular PHP + JS Code           | ✅ Done |
+| 🎨 Bootstrap 5 + Custom Design     | ✅ Done |
+| 📂 Category Dropdown + Color Badge | ✅ Done |
+| 📁 Category Filtering              | ✅ Done |
+| ✅ Completed Tasks Collapse UI      | ✅ Done |
 
 ---
 
 ## 🔮 Planned Enhancements
-- ⏳ Task statuses (e.g. Pending, In Progress, Done)
-- 🏷️ Task tagging or categories
-- 📅 Due dates & reminders
-- 🔍 Search & filtering options
-- 📊 User dashboard analytics (e.g. completed vs total)
-- 🧩 Google Login (OAuth2)
-- 🌍 Multi-language support (i18n)
-- 📬 Email notifications and summaries
+-- ⏳ Task statuses (Pending, In Progress, Done)
+-- ⏰ Due dates & reminders
+-- 🔍 Search functionality
+-- 📊 Dashboard analytics (e.g. % completed)
+-- 🧩 Google Login (OAuth2)
+-- 🌍 Multi-language support (i18n)
+-- 📬 Email notifications and summaries
 
 ---
 
