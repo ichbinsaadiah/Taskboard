@@ -125,6 +125,18 @@ if (!isset($_SESSION['user_id'])) {
   <!-- Task List Container (will be added by JS) -->
   <div id="todoList" class="row g-4"></div>
 
+  <!-- Completed Tasks Section -->
+<!-- Completed Tasks Section -->
+<div id="completedSection" class="mt-4" style="display: none;">
+  <button class="btn btn-outline-secondary w-100" data-bs-toggle="collapse" data-bs-target="#completedTasks" aria-expanded="false" aria-controls="completedTasks">
+    Show Completed Tasks
+  </button>
+  <div class="collapse mt-3" id="completedTasks">
+    <h5>Completed Tasks</h5>
+    <div id="completedList" class="row g-3"></div>
+  </div>
+</div>
+
 </div>
 
 <!-- Scripts -->

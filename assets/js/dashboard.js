@@ -1,4 +1,3 @@
-// dashboard.js
 document.addEventListener("DOMContentLoaded", function () {
   const todoList = document.getElementById("todoList");
   const heading = document.getElementById("todoHeading");
@@ -8,7 +7,11 @@ document.addEventListener("DOMContentLoaded", function () {
     fetch("fetch_todos.php")
       .then(res => res.json())
       .then(data => {
+        const completedList = document.getElementById("completedList");
         todoList.innerHTML = "";
+        completedList.innerHTML = "";
+        document.getElementById("completedSection").style.display = "none";
+        let hasCompleted = false;
 
         if (data.length === 0) {
           heading.style.display = "none";
@@ -64,7 +67,21 @@ document.addEventListener("DOMContentLoaded", function () {
   </div>
 `;
 
+const completedSection = document.getElementById("completedSection");
+completedSection.style.display = "none"; // hide by default
+let hasCompleted = false;
+
+// inside forEach(todo => { ... })
+if ((todo.status || '').toLowerCase() === 'completed') {
+  completedList.appendChild(card);
+  hasCompleted = true;
+} else {
   todoList.appendChild(card);
+}
+
+if (hasCompleted) {
+  completedSection.style.display = "block";
+}
 });
         }
       });
