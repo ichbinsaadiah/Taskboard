@@ -127,13 +127,13 @@ http://localhost/taskboard/login.php
 ---
 
 ## 🔮 Planned Enhancements
--- ⏳ Task statuses (Pending, In Progress, Done)
--- ⏰ Due dates & reminders
--- 🔍 Search functionality
--- 📊 Dashboard analytics (e.g. % completed)
--- 🧩 Google Login (OAuth2)
--- 🌍 Multi-language support (i18n)
--- 📬 Email notifications and summaries
+- ⏳ Task statuses (Pending, In Progress, Done)
+- ⏰ Due dates & reminders
+- 🔍 Search functionality
+- 📊 Dashboard analytics (e.g. % completed)
+- 🧩 Google Login (OAuth2)
+- 🌍 Multi-language support (i18n)
+- 📬 Email notifications and summaries
 
 ---
 
