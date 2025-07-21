@@ -8,9 +8,16 @@ function loadTodos() {
     .then(res => res.json())
     .then(data => {
       const selectedCategory = document.getElementById("categoryFilter").value;
-      const filteredData = selectedCategory === "All"
-        ? data
-        : data.filter(todo => (todo.list || "Inbox").trim() === selectedCategory);
+      const searchTerm = document.getElementById("searchInput").value.toLowerCase().trim();
+      document.getElementById("categoryFilter").addEventListener("change", loadTodos);
+
+const filteredData = data.filter(todo => {
+  const categoryMatch = selectedCategory === "All" || (todo.list || "Inbox").trim() === selectedCategory;
+  const searchMatch =
+    todo.title.toLowerCase().includes(searchTerm) ||
+    (todo.description || "").toLowerCase().includes(searchTerm);
+  return categoryMatch && searchMatch;
+});
 
       const completedList = document.getElementById("completedList");
       todoList.innerHTML = "";

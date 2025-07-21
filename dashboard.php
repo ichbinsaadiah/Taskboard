@@ -27,12 +27,19 @@ if (!isset($_SESSION['user_id'])) {
     <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addTaskModal">+ Add New Task</button>
   </div>
 
-  <!-- Category Filter -->
+<!-- Search and Filter -->
 <div class="row mb-3">
-  <div class="col-md-4">
-    <label for="categoryFilter" class="form-label fw-bold">Filter by Category</label>
+    <div class="col-md-6">
+    <div class="input-group">
+      <span class="input-group-text bg-white border-end-0">
+        <i class="bi bi-search text-muted"></i>
+      </span>
+      <input type="text" id="searchInput" class="form-control border-start-0" placeholder="Search tasks...">
+    </div>
+  </div>
+  <div class="col-md-6">
     <select id="categoryFilter" class="form-select">
-      <option value="All">All</option>
+      <option value="All">All Categories</option>
       <option value="Inbox">Inbox</option>
       <option value="Work">Work</option>
       <option value="Personal">Personal</option>
