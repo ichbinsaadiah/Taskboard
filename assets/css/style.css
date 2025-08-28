@@ -60,3 +60,13 @@
   color: #6c757d !important; /* Bootstrap's muted gray */
   opacity: 0.7;
 }
+
+#clearSearch {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+#clearSearch i {
+  font-size: 1.2rem;
+}

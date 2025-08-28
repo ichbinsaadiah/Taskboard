@@ -13,14 +13,19 @@ $title = trim($_POST['title'] ?? '');
 $description = trim($_POST['description'] ?? '');
 $list = trim($_POST['list'] ?? 'Inbox');
 $status = trim($_POST['status'] ?? 'Pending');
+$dueDate = $_POST['due_date'] ?? null;
+
+if ($dueDate === '') {
+    $dueDate = null;
+}
 
 if ($title === '') {
     echo json_encode(["status" => "error", "message" => "Title is required"]);
     exit;
 }
 
-$stmt = $conn->prepare("INSERT INTO todos (user_id, title, description, list, status) VALUES (?, ?, ?, ?, ?)");
-$stmt->bind_param("issss", $user_id, $title, $description, $list, $status);
+$stmt = $conn->prepare("INSERT INTO todos (user_id, title, description, list, status, due_date) VALUES (?, ?, ?, ?, ?, ?)");
+$stmt->bind_param("isssss", $user_id, $title, $description, $list, $status, $dueDate);
 
 if ($stmt->execute()) {
     echo json_encode(["status" => "success", "message" => "Task added successfully"]);

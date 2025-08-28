@@ -2,134 +2,155 @@ document.addEventListener("DOMContentLoaded", function () {
   const todoList = document.getElementById("todoList");
   const heading = document.getElementById("todoHeading");
   const noData = document.getElementById("noData");
+  const completedSection = document.getElementById("completedSection");
+  const completedList = document.getElementById("completedList");
+  const searchInput = document.getElementById("searchInput");
+  const clearSearch = document.getElementById("clearSearch");
 
-function loadTodos() {
-  fetch("fetch_todos.php")
-    .then(res => res.json())
-    .then(data => {
-      const selectedCategory = document.getElementById("categoryFilter").value;
-      const searchTerm = document.getElementById("searchInput").value.toLowerCase().trim();
-      document.getElementById("categoryFilter").addEventListener("change", loadTodos);
-
-const filteredData = data.filter(todo => {
-  const categoryMatch = selectedCategory === "All" || (todo.list || "Inbox").trim() === selectedCategory;
-  const searchMatch =
-    todo.title.toLowerCase().includes(searchTerm) ||
-    (todo.description || "").toLowerCase().includes(searchTerm);
-  return categoryMatch && searchMatch;
+// Show/hide clear button with fade
+searchInput.addEventListener("input", () => {
+  if (searchInput.value.trim() !== "") {
+    clearSearch.classList.remove("invisible", "opacity-0");
+  } else {
+    clearSearch.classList.add("invisible", "opacity-0");
+  }
+  loadTodos();
 });
 
-      const completedList = document.getElementById("completedList");
-      todoList.innerHTML = "";
-      completedList.innerHTML = "";
-      document.getElementById("completedSection").style.display = "none";
-      let hasCompleted = false;
-
-      if (filteredData.length === 0) {
-        heading.style.display = "none";
-        noData.style.display = "flex";
-      } else {
-        heading.style.display = "block";
-        noData.style.display = "none";
-
-        filteredData.forEach(todo => {
-          const card = document.createElement("div");
-          card.className = "col-md-4";
-
-  
-    const categoryColors = {
-    "Inbox": "primary",
-    "Work": "info",
-    "Personal": "success",
-    "Shopping": "warning",
-    "Errands": "danger",
-    "Health": "secondary",
-    "Study": "dark",
-    "Projects": "primary",
-    "Ideas": "info",
-    "Planning": "success"
-  };
-
-  const badgeColor = categoryColors[todo.list?.trim()] || "secondary";
-
-  card.innerHTML = `
-  <div class="card todo-card shadow-sm">
-    <div class="card-body">
-      <h5 class="card-title d-flex justify-content-between align-items-start">
-        <div class="d-flex align-items-center gap-2">
-  <input class="form-check-input task-checkbox border-dark" type="checkbox" data-id="${todo.id}" style="width: 1em; height: 1em;" ${(todo.status || '').toLowerCase() === 'completed' ? 'checked' : ''}>
-  <span class="task-title mb-0 ${(todo.status || '').toLowerCase() === 'completed' ? 'completed-task' : ''}">${todo.title}</span>
-</div>
-        <span>
-          <button class="btn btn-sm btn-outline-primary me-1 edit-btn" 
-                  data-id="${todo.id}" 
-                  data-title="${todo.title}" 
-                  data-description="${todo.description}"
-                  data-list="${todo.list || ''}">
-            <i class="bi bi-pencil"></i>
-          </button>
-          <button class="btn btn-sm btn-outline-danger delete-btn" 
-                  data-id="${todo.id}">
-            <i class="bi bi-trash"></i>
-          </button>
-        </span>
-      </h5>
-      <p class="card-text ${(todo.status || '').toLowerCase() === 'completed' ? 'completed-task' : ''}">${todo.description}</p>
-      <span class="badge bg-${badgeColor} text-light">${todo.list?.trim() || 'Inbox'}</span>
-    </div>
-  </div>
-`;
-
-const completedSection = document.getElementById("completedSection");
-completedSection.style.display = "none"; // hide by default
-let hasCompleted = false;
-
-// inside forEach(todo => { ... })
-if ((todo.status || '').toLowerCase() === 'completed') {
-  completedList.appendChild(card);
-  hasCompleted = true;
-} else {
-  todoList.appendChild(card);
-}
-
-if (hasCompleted) {
-  completedSection.style.display = "block";
-}
+// Clear search on button click
+clearSearch.addEventListener("click", () => {
+  searchInput.value = "";
+  clearSearch.classList.add("invisible", "opacity-0");
+  loadTodos();
 });
+
+  function loadTodos() {
+    fetch("fetch_todos.php")
+      .then(res => res.json())
+      .then(data => {
+        const selectedCategory = document.getElementById("categoryFilter").value;
+        const searchTerm = document.getElementById("searchInput").value.toLowerCase().trim();
+
+        const filteredData = data.filter(todo => {
+          const categoryMatch =
+            selectedCategory === "All" || (todo.list || "Inbox").trim() === selectedCategory;
+          const searchMatch =
+            todo.title.toLowerCase().includes(searchTerm) ||
+            (todo.description || "").toLowerCase().includes(searchTerm);
+          return categoryMatch && searchMatch;
+        });
+
+        // Reset sections
+        todoList.innerHTML = "";
+        completedList.innerHTML = "";
+        completedSection.style.display = "none";
+        let hasCompleted = false;
+
+        if (filteredData.length === 0) {
+          heading.style.display = "none";
+          noData.style.display = "flex";
+        } else {
+          heading.style.display = "block";
+          noData.style.display = "none";
+
+          filteredData.forEach(todo => {
+            const card = document.createElement("div");
+            card.className = "col-md-4";
+
+            const categoryColors = {
+              Inbox: "primary",
+              Work: "info",
+              Personal: "success",
+              Shopping: "warning",
+              Errands: "danger",
+              Health: "secondary",
+              Study: "dark",
+              Projects: "primary",
+              Ideas: "info",
+              Planning: "success"
+            };
+
+            const badgeColor = categoryColors[todo.list?.trim()] || "secondary";
+
+            card.innerHTML = `
+              <div class="card todo-card shadow-sm">
+                <div class="card-body">
+                  <h5 class="card-title d-flex justify-content-between align-items-start">
+                    <div class="d-flex align-items-center gap-2">
+                      <input class="form-check-input task-checkbox border-dark" type="checkbox"
+                        data-id="${todo.id}" style="width: 1em; height: 1em;"
+                        ${(todo.status || '').toLowerCase() === 'completed' ? 'checked' : ''}>
+                      <span class="task-title mb-0 ${(todo.status || '').toLowerCase() === 'completed' ? 'completed-task' : ''}">
+                        ${todo.title}
+                      </span>
+                    </div>
+                    <span>
+                      <button class="btn btn-sm btn-outline-primary me-1 edit-btn"
+                              data-id="${todo.id}"
+                              data-title="${todo.title}"
+                              data-description="${todo.description}"
+                              data-list="${todo.list || ''}"
+                              data-due_date="${todo.due_date || ''}">
+                        <i class="bi bi-pencil"></i>
+                      </button>
+                      <button class="btn btn-sm btn-outline-danger delete-btn"
+                              data-id="${todo.id}">
+                        <i class="bi bi-trash"></i>
+                      </button>
+                    </span>
+                  </h5>
+                  <p class="card-text ${(todo.status || '').toLowerCase() === 'completed' ? 'completed-task' : ''}">
+                    ${todo.description}
+                  </p>
+                  <span class="badge bg-${badgeColor} text-light">${(todo.list || 'Inbox').trim()}</span>
+                  ${todo.due_date ? `<span class="badge bg-info ms-2">${new Date(todo.due_date).toDateString()}</span>` : ""}
+                </div>
+              </div>
+            `;
+
+            if ((todo.status || '').toLowerCase() === 'completed') {
+              completedList.appendChild(card);
+              hasCompleted = true;
+            } else {
+              todoList.appendChild(card);
+            }
+          });
+
+          if (hasCompleted) {
+            completedSection.style.display = "block";
+          }
         }
       });
   }
 
   loadTodos();
   window.loadTodos = loadTodos;
+
+  // Filters
   document.getElementById("categoryFilter").addEventListener("change", loadTodos);
 
-
+  // Checkbox handler
   document.addEventListener("change", function (e) {
-  if (e.target.classList.contains("task-checkbox")) {
-    const taskId = e.target.dataset.id;
-    const isChecked = e.target.checked;
-    const newStatus = isChecked ? "completed" : "pending";
+    if (e.target.classList.contains("task-checkbox")) {
+      const taskId = e.target.dataset.id;
+      const isChecked = e.target.checked;
+      const newStatus = isChecked ? "completed" : "pending";
 
-    // Call PHP backend to update status
-    fetch("update_todo.php", {
-      method: "POST",
-      body: new URLSearchParams({
-        id: taskId,
-        status: newStatus
+      fetch("update_todo.php", {
+        method: "POST",
+        body: new URLSearchParams({ id: taskId, status: newStatus })
       })
-    })
-    .then(res => res.json())
-    .then(data => {
-      if (data.status === "success") {
-        console.log("Status updated:", newStatus);
-        loadTodos(); // reload tasks after update
-      } else {
-        alert("Failed to update status");
-      }
-    });
-  }
-});
+        .then(res => res.json())
+        .then(data => {
+          if (data.status === "success") {
+            console.log("Status updated:", newStatus);
+            loadTodos();
+          } else {
+            alert("Failed to update status");
+          }
+        });
+    }
+  });
 
   // Delete handler
   document.addEventListener("click", function (e) {
@@ -139,10 +160,7 @@ if (hasCompleted) {
         const formData = new FormData();
         formData.append("id", id);
 
-        fetch("delete_todo.php", {
-          method: "POST",
-          body: formData
-        })
+        fetch("delete_todo.php", { method: "POST", body: formData })
           .then(res => res.json())
           .then(data => {
             alert(data.message);
@@ -152,36 +170,34 @@ if (hasCompleted) {
     }
   });
 
-// Edit open handler
-document.addEventListener("click", function (e) {
-  const editBtn = e.target.closest(".edit-btn");
+  // Edit open handler
+  document.addEventListener("click", function (e) {
+    const editBtn = e.target.closest(".edit-btn");
+    if (!editBtn) return;
 
-  // ✅ Add null check before using dataset
-  if (!editBtn) return;
+    document.getElementById("edit_id").value = editBtn.dataset.id;
+    document.getElementById("edit_title").value = editBtn.dataset.title;
+    document.getElementById("edit_description").value = editBtn.dataset.description;
+    document.getElementById("edit_due_date").value = editBtn.dataset.due_date || "";
+    document.getElementById("editDueDateSelector").textContent = editBtn.dataset.due_date
+      ? new Date(editBtn.dataset.due_date).toDateString()
+      : "No due date";
 
-  document.getElementById("edit_id").value = editBtn.dataset.id;
-  document.getElementById("edit_title").value = editBtn.dataset.title;
-  document.getElementById("edit_description").value = editBtn.dataset.description;
+    populateCategoryDropdown("edit_list");
 
-  // Load categories into dropdown
-  populateCategoryDropdown("edit_list");
+    setTimeout(() => {
+      const currentCategory = editBtn.dataset.list;
+      const select = document.getElementById("edit_list");
+      if (select && currentCategory) {
+        [...select.options].forEach(opt => {
+          if (opt.value === currentCategory) opt.selected = true;
+        });
+      }
+    }, 100);
 
-  // Select the current category after dropdown loads
-  setTimeout(() => {
-    const currentCategory = editBtn.dataset.list;
-    const select = document.getElementById("edit_list");
-
-    if (select && currentCategory) {
-      [...select.options].forEach(opt => {
-        if (opt.value === currentCategory) opt.selected = true;
-      });
-    }
-  }, 100);
-
-  // Show the modal
-  const modal = new bootstrap.Modal(document.getElementById("editTaskModal"));
-  modal.show();
-});
+    const modal = new bootstrap.Modal(document.getElementById("editTaskModal"));
+    modal.show();
+  });
 
   // Edit submit handler
   document.getElementById("editForm").addEventListener("submit", function (e) {
@@ -192,19 +208,16 @@ document.addEventListener("click", function (e) {
     formData.append("title", document.getElementById("edit_title").value);
     formData.append("description", document.getElementById("edit_description").value);
     formData.append("list", document.getElementById("edit_list").value);
+    formData.append("due_date", document.getElementById("edit_due_date").value);
 
     console.log("Updating with:", {
-  id: document.getElementById("edit_id").value,
-  title: document.getElementById("edit_title").value,
-  description: document.getElementById("edit_description").value,
-  list: document.getElementById("edit_list").value
-});
+      id: document.getElementById("edit_id").value,
+      title: document.getElementById("edit_title").value,
+      description: document.getElementById("edit_description").value,
+      list: document.getElementById("edit_list").value
+    });
 
-
-    fetch("update_todo.php", {
-      method: "POST",
-      body: formData
-    })
+    fetch("update_todo.php", { method: "POST", body: formData })
       .then(res => res.json())
       .then(data => {
         alert(data.message);
@@ -220,13 +233,13 @@ document.addEventListener("click", function (e) {
 });
 
 function populateCategoryDropdown(selectId, callback) {
-  fetch('fetch_categories.php')
+  fetch("fetch_categories.php")
     .then(res => res.json())
     .then(data => {
       const select = document.getElementById(selectId);
-      select.innerHTML = ''; // clear existing
+      select.innerHTML = "";
 
-      const defaultOptions = ["Inbox", "Work", "Personal", "Shopping", "Errands", "Health", 'Study', "Ideas", "Planning"];
+      const defaultOptions = ["Inbox", "Work", "Personal", "Shopping", "Errands", "Health", "Study", "Ideas", "Planning"];
       const uniqueCategories = new Set([...defaultOptions, ...data]);
 
       uniqueCategories.forEach(cat => {
@@ -236,9 +249,8 @@ function populateCategoryDropdown(selectId, callback) {
         select.appendChild(opt);
       });
 
-      if (typeof callback === 'function') {
+      if (typeof callback === "function") {
         callback();
       }
     });
 }
-

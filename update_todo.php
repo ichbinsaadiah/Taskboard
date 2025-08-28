@@ -16,6 +16,7 @@ $title = isset($_POST['title']) ? trim($_POST['title']) : null;
 $desc  = isset($_POST['description']) ? trim($_POST['description']) : null;
 $list  = isset($_POST['list']) ? trim($_POST['list']) : null;
 $status = isset($_POST['status']) ? trim($_POST['status']) : null;
+$dueDate = trim($_POST['due_date'] ?? '');
 
 // Status-only update (via checkbox)
 if ($status !== null && $title === null && $desc === null && $list === null) {
@@ -24,8 +25,8 @@ if ($status !== null && $title === null && $desc === null && $list === null) {
 
 // Full update (from Edit modal)
 } elseif ($title !== null && $desc !== null && $list !== null) {
-    $stmt = $conn->prepare("UPDATE todos SET title = ?, description = ?, list = ? WHERE id = ? AND user_id = ?");
-    $stmt->bind_param("sssii", $title, $desc, $list, $id, $userId);
+    $stmt = $conn->prepare("UPDATE todos SET title = ?, description = ?, list = ?, due_date = ? WHERE id = ? AND user_id = ?");
+    $stmt->bind_param("ssssii", $title, $desc, $list, $dueDate, $id, $userId);
 
 // Invalid case
 } else {

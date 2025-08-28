@@ -13,14 +13,15 @@ if (!isset($_SESSION['user_id'])) {
 
 require_once 'includes/config.php';
 
-$userId = $_SESSION['user_id'];
-$stmt = $conn->prepare("SELECT id, title, description, status, list FROM todos WHERE user_id = ? ORDER BY id DESC");
-$stmt->bind_param("i", $userId);
+$user_id = $_SESSION['user_id'];
+$stmt = $conn->prepare("SELECT id, title, description, status, list, due_date FROM todos WHERE user_id = ? ORDER BY id DESC");
+$stmt->bind_param("i", $user_id);
 $stmt->execute();
 $result = $stmt->get_result();
 
 $todos = [];
 while ($row = $result->fetch_assoc()) {
+    $row['due_date'] = $row['due_date'] ?? null; 
     $todos[] = $row;
 }
 

@@ -14,6 +14,9 @@ if (!isset($_SESSION['user_id'])) {
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
   <link rel="stylesheet" href="assets/css/style.css">
+  <!-- Flatpickr CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
 </head>
 <body class="bg-light">
 <div class="container-fluid px-4 py-3">
@@ -29,14 +32,24 @@ if (!isset($_SESSION['user_id'])) {
 
 <!-- Search and Filter -->
 <div class="row mb-3">
-    <div class="col-md-6">
-    <div class="input-group">
-      <span class="input-group-text bg-white border-end-0">
-        <i class="bi bi-search text-muted"></i>
-      </span>
-      <input type="text" id="searchInput" class="form-control border-start-0" placeholder="Search tasks...">
+  <div class="col-md-6">
+    <div class="position-relative">
+      <div class="input-group">
+        <span class="input-group-text bg-white border-end-0">
+          <i class="bi bi-search text-muted"></i>
+        </span>
+        <input type="text" id="searchInput" class="form-control border-start-0" placeholder="Search tasks...">
+      </div>
+      <!-- Clear button placed inside input on the right -->
+      <button id="clearSearch"
+        class="btn position-absolute top-50 end-0 translate-middle-y me-2 invisible opacity-0"
+        type="button"
+        style="border: none; background: transparent; transition: opacity 0.3s; z-index: 5;">
+        <i class="bi bi-x text-muted"></i>
+      </button>
     </div>
   </div>
+
   <div class="col-md-6">
     <select id="categoryFilter" class="form-select">
       <option value="All">All Categories</option>
@@ -89,6 +102,26 @@ if (!isset($_SESSION['user_id'])) {
             <label for="description" class="form-label">Description</label>
             <textarea id="description" class="form-control" rows="3"></textarea>
           </div>
+          <div class="mb-3">
+  <label class="form-label">Due Date</label>
+  <div class="input-group">
+    <span class="input-group-text"><i class="bi bi-calendar-event"></i></span>
+    <button type="button" id="dueDateSelector" class="form-control text-start bg-white" data-bs-toggle="dropdown" aria-expanded="false">
+      No due date
+    </button>
+    <ul class="dropdown-menu w-100" id="dueDateDropdown">
+      <li><a class="dropdown-item due-option" data-offset="0">Today</a></li>
+      <li><a class="dropdown-item due-option" data-offset="1">Tomorrow</a></li>
+      <li><a class="dropdown-item due-option" data-offset="7">Next Week</a></li>
+      <li><hr class="dropdown-divider"></li>
+      <li><a class="dropdown-item" id="pickDateOption">Pick a date...</a></li>
+    </ul>
+  </div>
+
+  <!-- Hidden input for flatpickr -->
+  <input type="hidden" id="due_date" name="due_date">
+</div>
+
           <div id="formMessage" class="mt-2"></div>
         </div>
         <div class="modal-footer">
@@ -133,6 +166,24 @@ if (!isset($_SESSION['user_id'])) {
       <option value="Planning">Planning</option>
     </select>
   </div>
+  <div class="mb-3">
+  <label class="form-label">Due Date</label>
+  <div class="input-group">
+    <span class="input-group-text"><i class="bi bi-calendar-event"></i></span>
+    <button type="button" id="editDueDateSelector" class="form-control text-start bg-white" data-bs-toggle="dropdown" aria-expanded="false">
+      No due date
+    </button>
+    <ul class="dropdown-menu w-100" id="editDueDateDropdown">
+      <li><a class="dropdown-item edit-due-option" data-offset="0">Today</a></li>
+      <li><a class="dropdown-item edit-due-option" data-offset="1">Tomorrow</a></li>
+      <li><a class="dropdown-item edit-due-option" data-offset="7">Next Week</a></li>
+      <li><hr class="dropdown-divider"></li>
+      <li><a class="dropdown-item" id="editPickDateOption">Pick a date...</a></li>
+    </ul>
+  </div>
+  <!-- Hidden input for storing date -->
+  <input type="hidden" id="edit_due_date" name="edit_due_date">
+</div>
       </div>
       <div class="modal-footer">
         <button type="submit" class="btn btn-success">Update Task</button>
@@ -168,6 +219,8 @@ if (!isset($_SESSION['user_id'])) {
 <!-- Scripts -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="assets/js/dashboard.js"></script>
+<!-- Flatpickr JS -->
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script src="assets/js/todo_form.js"></script>
 
 </body>
