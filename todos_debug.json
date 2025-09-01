@@ -1,5 +1,21 @@
 [
     {
+        "id": 20,
+        "title": "Clear the due date",
+        "description": "Testing Clear Due Date",
+        "status": "pending",
+        "list": "Inbox",
+        "due_date": "2025-09-01"
+    },
+    {
+        "id": 19,
+        "title": "Reset the due date and Category",
+        "description": "Resting the due date and Category",
+        "status": "pending",
+        "list": "Projects",
+        "due_date": "2025-09-01"
+    },
+    {
         "id": 18,
         "title": "Task Project",
         "description": "Logout Button to be added",

@@ -3,6 +3,14 @@ document.addEventListener("DOMContentLoaded", function () {
   const form = document.getElementById("taskModalForm");
   const messageBox = document.getElementById("formMessage");
 
+  document.getElementById("cancelAddTask").addEventListener("click", () => {
+  form.reset();
+  dueDateHiddenInput.value = "";
+  dueDateSelector.textContent = "No due date";
+  document.getElementById("list").value = "Inbox";
+  messageBox.textContent = '';
+});
+
   form.addEventListener("submit", function (e) {
     e.preventDefault();
 
@@ -24,6 +32,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
       if (data.status === "success") {
         form.reset();
+
+         // Reset due date and category hidden field visible button text
+         dueDateHiddenInput.value = "";
+         dueDateSelector.textContent = "No due date";
+         document.getElementById("list").value = "Inbox";
 
         // Wait briefly before fetching the updated list
         setTimeout(() => {

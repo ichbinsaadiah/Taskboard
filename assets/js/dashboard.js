@@ -6,6 +6,15 @@ document.addEventListener("DOMContentLoaded", function () {
   const completedList = document.getElementById("completedList");
   const searchInput = document.getElementById("searchInput");
   const clearSearch = document.getElementById("clearSearch");
+  const dueDateInput = document.getElementById("due_date");
+  const dueDateSelector = document.getElementById("dueDateSelector");
+  const clearBtn = document.getElementById("clearDueDate");
+
+  // Cancel button handler
+  clearBtn.addEventListener("click", function () {
+    dueDateInput.value = ""; // clear hidden field
+    dueDateSelector.textContent = "No due date"; // reset visible button text
+  });
 
 // Show/hide clear button with fade
 searchInput.addEventListener("input", () => {
