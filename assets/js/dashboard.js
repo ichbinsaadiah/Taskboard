@@ -73,40 +73,42 @@ clearSearch.addEventListener("click", () => {
             const badgeColor = categoryColors[todo.list?.trim()] || "secondary";
 
             card.innerHTML = `
-              <div class="card todo-card shadow-sm">
-                <div class="card-body">
-                  <h5 class="card-title d-flex justify-content-between align-items-start">
-                    <div class="d-flex align-items-center gap-2">
-                      <input class="form-check-input task-checkbox border-dark" type="checkbox"
-                        data-id="${todo.id}" style="width: 1em; height: 1em;"
-                        ${(todo.status || '').toLowerCase() === 'completed' ? 'checked' : ''}>
-                      <span class="task-title mb-0 ${(todo.status || '').toLowerCase() === 'completed' ? 'completed-task' : ''}">
-                        ${todo.title}
-                      </span>
-                    </div>
-                    <span>
-                      <button class="btn btn-sm btn-outline-primary me-1 edit-btn"
-                              data-id="${todo.id}"
-                              data-title="${todo.title}"
-                              data-description="${todo.description}"
-                              data-list="${todo.list || ''}"
-                              data-due_date="${todo.due_date || ''}">
-                        <i class="bi bi-pencil"></i>
-                      </button>
-                      <button class="btn btn-sm btn-outline-danger delete-btn"
-                              data-id="${todo.id}">
-                        <i class="bi bi-trash"></i>
-                      </button>
-                    </span>
-                  </h5>
-                  <p class="card-text ${(todo.status || '').toLowerCase() === 'completed' ? 'completed-task' : ''}">
-                    ${todo.description}
-                  </p>
-                  <span class="badge bg-${badgeColor} text-light">${(todo.list || 'Inbox').trim()}</span>
-                  ${todo.due_date ? `<span class="badge bg-info ms-2">${new Date(todo.due_date).toDateString()}</span>` : ""}
-                </div>
-              </div>
-            `;
+  <div class="card todo-card shadow-sm h-100 d-flex flex-column">
+    <div class="card-body d-flex flex-column">
+      <h5 class="card-title d-flex justify-content-between align-items-start">
+        <div class="d-flex align-items-center gap-2">
+          <input class="form-check-input task-checkbox border-dark" type="checkbox"
+            data-id="${todo.id}" style="width: 1em; height: 1em;"
+            ${(todo.status || '').toLowerCase() === 'completed' ? 'checked' : ''}>
+          <span class="task-title mb-0 ${(todo.status || '').toLowerCase() === 'completed' ? 'completed-task' : ''}">
+            ${todo.title}
+          </span>
+        </div>
+        <span>
+          <button class="btn btn-sm btn-outline-primary me-1 edit-btn"
+                  data-id="${todo.id}"
+                  data-title="${todo.title}"
+                  data-description="${todo.description}"
+                  data-list="${todo.list || ''}"
+                  data-due_date="${todo.due_date || ''}">
+            <i class="bi bi-pencil"></i>
+          </button>
+          <button class="btn btn-sm btn-outline-danger delete-btn"
+                  data-id="${todo.id}">
+            <i class="bi bi-trash"></i>
+          </button>
+        </span>
+      </h5>
+      <p class="card-text ${(todo.status || '').toLowerCase() === 'completed' ? 'completed-task' : ''}">
+        ${todo.description}
+      </p>
+      <div class="justify-content-between align-items-center">
+        <span class="badge bg-${badgeColor} text-light">${(todo.list || 'Inbox').trim()}</span>
+        ${todo.due_date ? `<span class="badge bg-info ms-2">${new Date(todo.due_date).toDateString()}</span>` : ""}
+      </div>
+    </div>
+  </div>
+`;
 
             if ((todo.status || '').toLowerCase() === 'completed') {
               completedList.appendChild(card);
