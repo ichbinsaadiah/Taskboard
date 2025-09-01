@@ -27,7 +27,12 @@ if (!isset($_SESSION['user_id'])) {
       <img src="assets/img/logo.png" alt="Logo" class="rounded-circle logo-img logo-bounce">
       <h4 class="mb-0">Welcome, <?= htmlspecialchars($_SESSION['user_name']) ?></h4>
     </div>
-    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addTaskModal">+ Add New Task</button>
+    <div class="d-flex gap-2">
+      <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addTaskModal">+ Add New Task</button>
+    <a href="logout.php" class="btn btn-danger d-flex align-items-center gap-1 shadow-sm px-3 rounded-pill">
+  <i class="bi bi-box-arrow-right"></i> Logout
+</a>
+    </div>
   </div>
 
 <!-- Search and Filter -->

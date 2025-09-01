@@ -1,5 +1,13 @@
 [
     {
+        "id": 18,
+        "title": "Task Project",
+        "description": "Logout Button to be added",
+        "status": "completed",
+        "list": "Projects",
+        "due_date": "2025-08-28"
+    },
+    {
         "id": 17,
         "title": "Task project",
         "description": "User has selected due date but do not want than there is no cancel option so it should show a cancel unique Ui option",
@@ -10,9 +18,9 @@
     {
         "id": 16,
         "title": "Task Project",
-        "description": "If user has already added due date in first card then when again clicked on \"Add New Task\" then a new card is open at that time the due date should also refresh it should not show the previous due date",
+        "description": "If user has already added due date in first card then when again clicked on",
         "status": "pending",
-        "list": "Projects",
+        "list": "Health",
         "due_date": "2025-08-26"
     },
     {
@@ -27,16 +35,16 @@
         "id": 14,
         "title": "Task Project",
         "description": "Search Filter - Functionality add a cross icon as well if there is text and click on cross icon it should delete",
-        "status": "pending",
-        "list": "Projects",
+        "status": "completed",
+        "list": "Personal",
         "due_date": "2025-08-26"
     },
     {
         "id": 13,
         "title": "Task Project",
         "description": "Search Filter - Work Flow",
-        "status": "pending",
-        "list": "Projects",
+        "status": "completed",
+        "list": "Shopping",
         "due_date": "2025-08-30"
     }
 ]
