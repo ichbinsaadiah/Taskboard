@@ -121,6 +121,11 @@ if (!isset($_SESSION['user_id'])) {
       <li><hr class="dropdown-divider"></li>
       <li><a class="dropdown-item" id="pickDateOption">Pick a date...</a></li>
     </ul>
+    <!-- Cancel button moved here -->
+    <button type="button" id="clearDueDate" 
+            class="btn btn-sm btn-outline-secondary">
+      <i class="bi bi-x-circle"></i>
+    </button>
   </div>
 
   <!-- Hidden input for flatpickr -->

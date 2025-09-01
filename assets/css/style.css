@@ -293,7 +293,10 @@
 }
 
 @keyframes cardIn {
-  to { opacity: 1; transform: translateY(0) scale(1); }
+  to { 
+    opacity: 1; 
+    transform: translateY(0) scale(1); 
+  }
 }
 
 /* Neon aura border */
