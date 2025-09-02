@@ -1,66 +1,58 @@
 [
     {
-        "id": 20,
-        "title": "Clear the due date",
-        "description": "Testing Clear Due Date",
+        "id": 27,
+        "title": "Task Project",
+        "description": "After all the task is complete it should show No task is assigned and below the Show complete task button should be visible as the task are completed but there are no task pending",
+        "status": "pending",
+        "list": "Projects",
+        "due_date": null
+    },
+    {
+        "id": 26,
+        "title": "Task Project",
+        "description": "after clickign on due date the dropdown shoud get open not the calendar the calendar should only open when the pick a date is selected",
         "status": "pending",
         "list": "Inbox",
-        "due_date": "2025-09-01"
+        "due_date": null
     },
     {
-        "id": 19,
-        "title": "Reset the due date and Category",
-        "description": "Resting the due date and Category",
+        "id": 25,
+        "title": "Task Project",
+        "description": "After completing all the task a task should get created",
         "status": "pending",
         "list": "Projects",
-        "due_date": "2025-09-01"
+        "due_date": "2025-09-03"
     },
     {
-        "id": 18,
+        "id": 24,
         "title": "Task Project",
-        "description": "Logout Button to be added",
+        "description": "Trying to add the task",
         "status": "completed",
         "list": "Projects",
-        "due_date": "2025-08-28"
+        "due_date": null
     },
     {
-        "id": 17,
+        "id": 23,
+        "title": "Task Project",
+        "description": "Click on due date after setting then cancel it should not show the due date while adding",
+        "status": "completed",
+        "list": "Projects",
+        "due_date": null
+    },
+    {
+        "id": 22,
+        "title": "Task Project",
+        "description": "To test the edit button then click on due date cancel button and the due date should get cancelled",
+        "status": "completed",
+        "list": "Projects",
+        "due_date": "0000-00-00"
+    },
+    {
+        "id": 21,
         "title": "Task project",
-        "description": "User has selected due date but do not want than there is no cancel option so it should show a cancel unique Ui option",
-        "status": "pending",
+        "description": "Creating task adding task",
+        "status": "completed",
         "list": "Projects",
-        "due_date": "2025-08-26"
-    },
-    {
-        "id": 16,
-        "title": "Task Project",
-        "description": "If user has already added due date in first card then when again clicked on",
-        "status": "pending",
-        "list": "Health",
-        "due_date": "2025-08-26"
-    },
-    {
-        "id": 15,
-        "title": "Task Project",
-        "description": "In the case there is no sentence then it should not show anything and",
-        "status": "pending",
-        "list": "Work",
-        "due_date": "2025-08-26"
-    },
-    {
-        "id": 14,
-        "title": "Task Project",
-        "description": "Search Filter - Functionality add a cross icon as well if there is text and click on cross icon it should delete",
-        "status": "completed",
-        "list": "Personal",
-        "due_date": "2025-08-26"
-    },
-    {
-        "id": 13,
-        "title": "Task Project",
-        "description": "Search Filter - Work Flow",
-        "status": "completed",
-        "list": "Shopping",
-        "due_date": "2025-08-30"
+        "due_date": null
     }
 ]

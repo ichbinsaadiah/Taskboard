@@ -9,6 +9,9 @@ document.addEventListener("DOMContentLoaded", function () {
   const dueDateInput = document.getElementById("due_date");
   const dueDateSelector = document.getElementById("dueDateSelector");
   const clearBtn = document.getElementById("clearDueDate");
+  const editClearBtn = document.getElementById("editClearBtn");
+  const editDueDateInput = document.getElementById("edit_due_date");
+  const editDueDateSelector = document.getElementById("editDueDateSelector");
 
   // Cancel button handler
   clearBtn.addEventListener("click", function () {
@@ -16,22 +19,29 @@ document.addEventListener("DOMContentLoaded", function () {
     dueDateSelector.textContent = "No due date"; // reset visible button text
   });
 
-// Show/hide clear button with fade
-searchInput.addEventListener("input", () => {
-  if (searchInput.value.trim() !== "") {
-    clearSearch.classList.remove("invisible", "opacity-0");
-  } else {
-    clearSearch.classList.add("invisible", "opacity-0");
+  if (editClearBtn) {
+    editClearBtn.addEventListener("click", function () {
+      editDueDateInput.value = ""; // clear hidden field
+      editDueDateSelector.textContent = "No due date"; // reset visible button text
+    });
   }
-  loadTodos();
-});
 
-// Clear search on button click
-clearSearch.addEventListener("click", () => {
-  searchInput.value = "";
-  clearSearch.classList.add("invisible", "opacity-0");
-  loadTodos();
-});
+  // Show/hide clear button with fade
+  searchInput.addEventListener("input", () => {
+    if (searchInput.value.trim() !== "") {
+      clearSearch.classList.remove("invisible", "opacity-0");
+    } else {
+      clearSearch.classList.add("invisible", "opacity-0");
+    }
+    loadTodos();
+  });
+
+  // Clear search on button click
+  clearSearch.addEventListener("click", () => {
+    searchInput.value = "";
+    clearSearch.classList.add("invisible", "opacity-0");
+    loadTodos();
+  });
 
   function loadTodos() {
     fetch("fetch_todos.php")
@@ -81,6 +91,12 @@ clearSearch.addEventListener("click", () => {
 
             const badgeColor = categoryColors[todo.list?.trim()] || "secondary";
 
+            let dueDateBadge = "";
+            if (todo.due_date && !isNaN(new Date(todo.due_date))) {
+              const options = { weekday: "short", month: "short", day: "2-digit", year: "numeric" };
+              dueDateBadge = `<span class="badge bg-info ms-2">${new Date(todo.due_date).toLocaleDateString("en-US", options)}</span>`;
+            }
+
             card.innerHTML = `
   <div class="card todo-card shadow-sm h-100 d-flex flex-column">
     <div class="card-body d-flex flex-column">
@@ -113,7 +129,7 @@ clearSearch.addEventListener("click", () => {
       </p>
       <div class="justify-content-between align-items-center">
         <span class="badge bg-${badgeColor} text-light">${(todo.list || 'Inbox').trim()}</span>
-        ${todo.due_date ? `<span class="badge bg-info ms-2">${new Date(todo.due_date).toDateString()}</span>` : ""}
+        ${dueDateBadge}
       </div>
     </div>
   </div>
@@ -190,9 +206,14 @@ clearSearch.addEventListener("click", () => {
     document.getElementById("edit_title").value = editBtn.dataset.title;
     document.getElementById("edit_description").value = editBtn.dataset.description;
     document.getElementById("edit_due_date").value = editBtn.dataset.due_date || "";
-    document.getElementById("editDueDateSelector").textContent = editBtn.dataset.due_date
-      ? new Date(editBtn.dataset.due_date).toDateString()
-      : "No due date";
+    const dueDateValue = editBtn.dataset.due_date;
+    document.getElementById("edit_due_date").value = dueDateValue || "";
+
+    if (dueDateValue && !isNaN(new Date(dueDateValue))) {
+      document.getElementById("editDueDateSelector").textContent = new Date(dueDateValue).toDateString();
+    } else {
+      document.getElementById("editDueDateSelector").textContent = "No due date";
+    }
 
     populateCategoryDropdown("edit_list");
 
