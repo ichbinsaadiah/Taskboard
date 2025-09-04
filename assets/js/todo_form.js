@@ -2,7 +2,6 @@
 document.addEventListener("DOMContentLoaded", function () {
   const form = document.getElementById("taskModalForm");
   const messageBox = document.getElementById("formMessage");
-
   const cancelBtn = document.getElementById("cancelAddTask");
   if (cancelBtn) {
     cancelBtn.addEventListener("click", () => {
