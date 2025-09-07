@@ -94,7 +94,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // Flatpickr (popup anchored to the button)
   const fp = flatpickr(dueDateSelector, {
     dateFormat: "Y-m-d",
-    clickOpens: true,   // open directly on button click
+    clickOpens: false,   // open directly on button click
     allowInput: false,
     onChange: function (selectedDates, dateStr) {
       if (dateStr) {

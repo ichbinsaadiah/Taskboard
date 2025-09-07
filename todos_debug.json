@@ -1,5 +1,13 @@
 [
     {
+        "id": 28,
+        "title": "Task project",
+        "description": "Trying to add the task and see if the date picker gets open or gets open after clicking on pick a date only",
+        "status": "completed",
+        "list": "Projects",
+        "due_date": "2025-09-02"
+    },
+    {
         "id": 27,
         "title": "Task Project",
         "description": "After all the task is complete it should show No task is assigned and below the Show complete task button should be visible as the task are completed but there are no task pending",
@@ -11,7 +19,7 @@
         "id": 26,
         "title": "Task Project",
         "description": "after clickign on due date the dropdown shoud get open not the calendar the calendar should only open when the pick a date is selected",
-        "status": "pending",
+        "status": "completed",
         "list": "Inbox",
         "due_date": null
     },
@@ -19,7 +27,7 @@
         "id": 25,
         "title": "Task Project",
         "description": "After completing all the task a task should get created",
-        "status": "pending",
+        "status": "completed",
         "list": "Projects",
         "due_date": "2025-09-03"
     },
