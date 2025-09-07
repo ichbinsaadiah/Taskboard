@@ -1,30 +1,57 @@
+// login.js
 document.addEventListener("DOMContentLoaded", function () {
-  document.getElementById("loginForm").addEventListener("submit", function (e) {
+  const loginForm = document.getElementById("loginForm");
+  const result = document.getElementById("result");
+  const emailInput = document.getElementById("email");
+  const rememberMe = document.getElementById("rememberMe");
+
+  // === Auto-fill saved email if Remember Me was checked before ===
+  if (localStorage.getItem("rememberMe") === "true") {
+    emailInput.value = localStorage.getItem("savedEmail") || "";
+    rememberMe.checked = true;
+  }
+
+  loginForm.addEventListener("submit", function (e) {
     e.preventDefault();
 
     const formData = new FormData();
-    formData.append("email", document.getElementById("email").value);
+    formData.append("email", emailInput.value);
     formData.append("password", document.getElementById("password").value);
 
     fetch("login.php", {
       method: "POST",
       body: formData
     })
-    .then(res => res.json())
-    .then(data => {
-      const result = document.getElementById("result");
-      result.textContent = data.message;
-      result.className = data.status === "success" ? "text-success" : "text-danger";
+      .then(res => {
+        if (!res.ok) {
+          throw new Error("Server error: " + res.status);
+        }
+        return res.json();
+      })
+      .then(data => {
+        result.textContent = data.message;
+        result.className = data.status === "success" ? "text-success" : "text-danger";
 
-      if (data.status === "success") {
-        // Redirect to dashboard
-        setTimeout(() => {
-          window.location.href = "dashboard.php";
-        }, 1000);
-      }
-    })
-    .catch(err => {
-      console.error("Login error:", err);
-    });
+        if (data.status === "success") {
+          // === Handle Remember Me ===
+          if (rememberMe.checked) {
+            localStorage.setItem("rememberMe", "true");
+            localStorage.setItem("savedEmail", emailInput.value);
+          } else {
+            localStorage.removeItem("rememberMe");
+            localStorage.removeItem("savedEmail");
+          }
+
+          // Redirect to dashboard
+          setTimeout(() => {
+            window.location.href = "dashboard.php";
+          }, 1000);
+        }
+      })
+      .catch(err => {
+        console.error("Login error:", err);
+        result.textContent = "Error: " + err.message;
+        result.className = "text-danger";
+      });
   });
 });
