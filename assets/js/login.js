@@ -17,6 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const formData = new FormData();
     formData.append("email", emailInput.value);
     formData.append("password", document.getElementById("password").value);
+    formData.append("remember", rememberMe.checked ? "1" : "0");
 
     fetch("login.php", {
       method: "POST",
