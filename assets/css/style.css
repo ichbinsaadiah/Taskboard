@@ -5,7 +5,8 @@
   align-items: center;
   justify-content: center;
   background: #f8f9fa; /* soft off-white */
-  padding: 2rem;
+  padding: 0;
+  overflow: hidden;
 }
 
 /* ===== Container Split ===== */
