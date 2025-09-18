@@ -1,0 +1,21 @@
+# === Sensitive configs ===
+includes/config.php
+.env
+
+# === Vendor (Composer) ===
+/vendor/
+
+# === Logs ===
+/logs/
+/*.log
+
+# === IDE/system files ===
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# === Cache / temp ===
+/tmp/
+/cache/
+/sessions/
