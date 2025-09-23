@@ -42,58 +42,78 @@ if (!isset($_SESSION['user_id'])) {
 </head>
 
 <body class="bg-light">
-  <div class="container-fluid px-4 py-3">
-
-    <!-- Top Header -->
-    <div class="header-bar mb-4">
-      <div class="header-left">
-        <img src="assets/img/logo.png" alt="Logo" class="rounded-circle logo-img logo-bounce">
-        <h4 class="mb-0">Welcome, <?= htmlspecialchars($_SESSION['user_name']) ?></h4>
-      </div>
-      <div class="d-flex gap-2">
-        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addTaskModal">+ Add New Task</button>
-        <a href="logout.php" class="btn btn-danger d-flex align-items-center gap-1 shadow-sm px-3 rounded-pill">
-          <i class="bi bi-box-arrow-right"></i> Logout
-        </a>
-      </div>
+  <div class="d-flex">
+  <!-- Sidebar -->
+  <aside id="sidebar" class="bg-white border-end vh-100 p-3" style="width: 250px;">
+    <!-- Profile -->
+    <div class="text-center mb-4">
+      <img src="assets/img/user.png" alt="User" class="rounded-circle mb-2" width="60">
+      <h6 class="mb-0"><?= htmlspecialchars($_SESSION['user_name']); ?></h6>
+      <small class="text-muted"><?= $_SESSION['user_email'] ?? ""; ?></small>
     </div>
 
-    <!-- Search and Filter -->
-    <div class="row mb-3">
-      <div class="col-md-6">
-        <div class="position-relative">
-          <div class="input-group">
-            <span class="input-group-text bg-white border-end-0">
-              <i class="bi bi-search text-muted"></i>
-            </span>
-            <input type="text" id="searchInput" class="form-control border-start-0" placeholder="Search tasks...">
-          </div>
-          <!-- Clear button placed inside input on the right -->
-          <button id="clearSearch"
-            class="btn position-absolute top-50 end-0 translate-middle-y me-2 invisible opacity-0"
-            type="button"
-            style="border: none; background: transparent; transition: opacity 0.3s; z-index: 5;">
-            <i class="bi bi-x text-muted"></i>
-          </button>
+    <!-- Menu -->
+    <ul class="list-unstyled">
+      <li><a href="#" class="d-flex align-items-center text-dark text-decoration-none"><i class="bi bi-brightness-alt-high me-2"></i> My Day</a></li>
+      <li><a href="#" class="d-flex align-items-center text-dark text-decoration-none"><i class="bi bi-star me-2 text-danger"></i> Important</a></li>
+      <li><a href="#" class="d-flex align-items-center text-dark text-decoration-none"><i class="bi bi-house me-2"></i> All Tasks</a></li>
+      <hr>
+    </ul>
+  </aside>
+
+  <!-- Main Dashboard -->
+  <main id="mainContent" class="flex-grow-1 p-4" style="margin-left: 250px;">
+    <div class="container-fluid px-4 py-3">
+
+      <!-- Top Header -->
+      <div class="header-bar mb-4">
+        <div class="header-left">
+          <img src="assets/img/logo.png" alt="Logo" class="rounded-circle logo-img logo-bounce">
+          <h4 class="mb-0">Welcome, <?= htmlspecialchars($_SESSION['user_name']) ?></h4>
+        </div>
+        <div class="d-flex gap-2">
+          <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addTaskModal">+ Add New Task</button>
+          <a href="logout.php" class="btn btn-danger d-flex align-items-center gap-1 shadow-sm px-3 rounded-pill">
+            <i class="bi bi-box-arrow-right"></i> Logout
+          </a>
         </div>
       </div>
 
-      <div class="col-md-6">
-        <select id="categoryFilter" class="form-select">
-          <option value="All">All Categories</option>
-          <option value="Inbox">Inbox</option>
-          <option value="Work">Work</option>
-          <option value="Personal">Personal</option>
-          <option value="Shopping">Shopping</option>
-          <option value="Errands">Errands</option>
-          <option value="Health">Health</option>
-          <option value="Study">Study</option>
-          <option value="Projects">Projects</option>
-          <option value="Ideas">Ideas</option>
-          <option value="Planning">Planning</option>
-        </select>
+      <!-- Search and Filter -->
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <div class="position-relative">
+            <div class="input-group">
+              <span class="input-group-text bg-white border-end-0">
+                <i class="bi bi-search text-muted"></i>
+              </span>
+              <input type="text" id="searchInput" class="form-control border-start-0" placeholder="Search tasks...">
+            </div>
+            <button id="clearSearch"
+              class="btn position-absolute top-50 end-0 translate-middle-y me-2 invisible opacity-0"
+              type="button"
+              style="border: none; background: transparent; transition: opacity 0.3s; z-index: 5;">
+              <i class="bi bi-x text-muted"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <select id="categoryFilter" class="form-select">
+            <option value="All">All Categories</option>
+            <option value="Inbox">Inbox</option>
+            <option value="Work">Work</option>
+            <option value="Personal">Personal</option>
+            <option value="Shopping">Shopping</option>
+            <option value="Errands">Errands</option>
+            <option value="Health">Health</option>
+            <option value="Study">Study</option>
+            <option value="Projects">Projects</option>
+            <option value="Ideas">Ideas</option>
+            <option value="Planning">Planning</option>
+          </select>
+        </div>
       </div>
-    </div>
 
     <!-- Bootstrap Modal -->
     <div class="modal fade" id="addTaskModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="addTaskLabel" aria-hidden="true">
